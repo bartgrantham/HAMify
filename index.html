@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Test</title>
+  <link href="style.css" media="all" rel="stylesheet" />
+  <script language='javascript' type="text/javascript" src="jquery-2.1.3.min.js"></script>
+  <script language='javascript' type="text/javascript" src="hamify.js"></script>
+</head>
+<body>
+  <div id='overlay'></div>
+  <div id='content'>
+    <img id='image' src='leiden.jpg' />
+    <canvas id='ham'></canvas>
+  </div>
+  <script>
+$(function(){
+    //var overlay_timer = false;
+    //$('body').bind('mousedown', function(e){  e.stopPropagation();  e.preventDefault();  $('#image').addClass('on');  });
+    //$('body').bind('mouseup', function(e){  e.stopPropagation();  e.preventDefault();  $('#image').removeClass('on');  });
+    $('body').bind('mousedown', function(e){  e.stopPropagation();  e.preventDefault();  $('#image').show();  $('#ham').hide();  });
+    $('body').bind('mouseup', function(e){  e.stopPropagation();  e.preventDefault();  $('#image').hide();  $('#ham').show();  });
+    
+    $('#overlay').bind('mousemove dragenter dragover', function(e){
+        //if ( overlay_timer !== false ) {  clearTimeout(overlay_timer);  }
+        //var $this = $(this);
+        //$this.addClass('on');
+        //overlay_timer = setTimeout(function(){  $this.removeClass('on');  }, 1500);
+        e.stopPropagation();  e.preventDefault();
+    });
+    $('#overlay').on('drop', function(e) {
+        e.stopPropagation();  e.preventDefault();
+
+        var file = e.originalEvent.dataTransfer.files[0];
+        if ( ! /^image\//.test(file.type) ) {  return;  }
+        var reader = new FileReader();
+        reader.onload = function(e) {  $('#image')[0].src = e.target.result;  }
+        reader.readAsDataURL(file);
+    });
+    $('#image').on('load', function(){  HAMify(this, $('#ham')[0]);  });
+});
+  </script>
+</body>
+</html>
