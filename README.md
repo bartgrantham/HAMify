@@ -17,3 +17,10 @@ Some observations:
 * Add a slider for adding NTSC-like chroma bleed
 * Add "Select file..."
 * Add "Enter URL: "
+* New algorithms
+  * HAM that actually uses a 16-color palette + altering palette colors optimally
+  * Arne's DCPU mode
+  * C64 block mode
+  * Apple II color mode
+  * NES sprite mode
+  * (spacial color quantization)[http://www.cs.berkeley.edu/~dcoetzee/downloads/scolorq/]
